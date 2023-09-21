@@ -1,0 +1,3 @@
+KEVJ (Kev Java)#KEVJ - это фреймворк, созданный мной на Java. Этот сайт работает благодаря нему.
+PortGit (Portable Git)#PortGit - это расширение для Visual Studio Code, которое меняет путь к Git при каждом запуске. Проект был создан для portable версий VScode и Git, т. к. на каждом ПК USB накпоителю присваивается новая буква.
+(RIP) Manga Visual#Manga Visual - созданная на flutter программа, которая позволяла скачивать мангу и ранобэ из mangalib.me и ranobelib.me. Однако после добавления на сайт защиты CloudFlare программа стала бесполезна.
