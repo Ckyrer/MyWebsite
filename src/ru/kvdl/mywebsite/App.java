@@ -4,10 +4,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
-import ru.kvdl.kevj.DHOperator;
-import ru.kvdl.kevj.Overwatch;
-import ru.kvdl.kevj.Responser;
-import ru.kvdl.kevj.Server;
+import ru.kvdl.kevlight.DHOperator;
+import ru.kvdl.kevlight.Responser;
+import ru.kvdl.kevlight.Server;
+import ru.kvdl.kevlight.KLObserver;
+import ru.kvdl.kevlight.KLRequestHandler;
 
 public class App {  
     // Путь к папке resources
@@ -28,26 +29,26 @@ public class App {
         return res;
     }
 
+    @KLObserver
+    public boolean overwatch(String req, String[] head, String ip, Responser resp) {
+        if (!req.equals("")) {
+            resp.sendResponse("<script>document.location.replace('/')</script>", "200 OK");
+            return false;
+        }
+        return true;
+    }
+
+    @KLRequestHandler(request = "")
+    public void home(String req, String[] head, String ip, Responser resp) {
+        final String data = getProjectsCards(new File(path+"data/projects.txt"));
+        resp.sendResponse(
+            DHOperator.buildPage(path+"pages/home").replace("<!-- PROJECTS HERE -->", data), 
+            "200 OK"
+        );
+    }
+
     public static void main(String[] arguments) {
-        Overwatch handler = (String req, String ip, String[] args, Responser resp) -> {
-            if (!req.equals("")) {
-                resp.sendResponse("<script>document.location.replace('/')</script>", "200 OK");
-                return false;
-            }
-            return true;
-        };
-
-        // ПОТОМ ЗАМЕНИТЬ НА Integer.parseInt(arguments[0])
-        Server host = new Server(4040, handler);
-
-        // Главная страница
-        host.addRequestHandler("", false, (String[] headers, String ip, Responser resp) -> {
-            final String data = getProjectsCards(new File(path+"data/projects.txt"));
-            resp.sendResponse(
-                DHOperator.buildPage(path+"pages/home").replace("<!-- PROJECTS HERE -->", data), 
-                "200 OK"
-            );
-        });
+        Server host = new Server(new App(), 4040);
 
         host.start();
     }
