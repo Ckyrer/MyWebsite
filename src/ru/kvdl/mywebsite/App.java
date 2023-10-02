@@ -7,8 +7,8 @@ import java.io.FileReader;
 import ru.kvdl.kevlight.DHOperator;
 import ru.kvdl.kevlight.Responser;
 import ru.kvdl.kevlight.Server;
-import ru.kvdl.kevlight.KLObserver;
-import ru.kvdl.kevlight.KLRequestHandler;
+import ru.kvdl.kevlight.annotations.KLObserver;
+import ru.kvdl.kevlight.annotations.KLRequestHandler;
 
 public class App {  
     // Путь к папке resources
@@ -39,7 +39,7 @@ public class App {
     }
 
     @KLRequestHandler(request = "")
-    public void home(String req, String[] head, String ip, Responser resp) {
+    public void home(Responser resp) {
         final String data = getProjectsCards(new File(path+"data/projects.txt"));
         resp.sendResponse(
             DHOperator.buildPage(path+"pages/home").replace("<!-- PROJECTS HERE -->", data), 
