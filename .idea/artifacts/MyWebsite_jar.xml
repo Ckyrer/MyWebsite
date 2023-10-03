@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MyWebsite:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MyWebsite_jar</output-path>
+    <root id="archive" name="MyWebsite.jar">
+      <element id="module-output" name="MyWebsite" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyWebsite.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/KevLight.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
